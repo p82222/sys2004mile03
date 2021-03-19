@@ -28,6 +28,15 @@ public class ShoppingCart {
      */
     //worked, tested
     public void addToCart(int productID, int quantity){
+
+        if(items.containsKey(productID)){
+                items.put(productID, items.get(productID) + quantity);
+                return;
+
+
+        }
+
+
         items.put(productID,quantity);
 
     }
