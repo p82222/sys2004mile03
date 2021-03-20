@@ -94,7 +94,8 @@ public class StoreManager {
                 int id = p.getId();
                 String name = p.getName();
                 double price = p.getPrice();
-                iteminfo.append(id);
+                int stock = this.getInventories().get(i).getQuantity(id);
+                iteminfo.append(stock);
                 iteminfo.append(" | ");
                 iteminfo.append(name);
                 iteminfo.append(" | ");
