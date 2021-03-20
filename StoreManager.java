@@ -5,10 +5,7 @@
 
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class StoreManager {
@@ -33,18 +30,11 @@ public class StoreManager {
      */
     public StoreManager(){
         this(new Inventory());
-
     }
 
     public StoreManager(Inventory inventory){
         this.inventory = inventory;
         shoppingCarts = new HashMap<>();
-
-        System.out.println(inventory);
-        for(int i = 0; i < inventorys.size(); i++){
-            for (Product p: inventorys.get(i).getProducts().keySet())
-                System.out.println(p.getName());
-        }
     }
 
     /**
@@ -59,14 +49,6 @@ public class StoreManager {
         stock = inventory.getQuantity(id);
         System.out.println("Stock is " +stock);
     }
-
-
-
-
-
-
-
-
 
 
     public void newCart(){
@@ -132,6 +114,9 @@ public class StoreManager {
     public void addToCart(ShoppingCart shoppingCart){
 
         StringBuilder iteminfo  = new StringBuilder();
+        int productID = 0;
+        int Quantity = 0;
+        boolean flag = true;
 
         System.out.println("\\----------ADD---------/");
         System.out.println();
@@ -155,14 +140,30 @@ public class StoreManager {
 
         System.out.println(iteminfo);
         System.out.println("");
-        System.out.println("Please enter Product ID");
-        Scanner keyboard = new Scanner(System.in);
-        int productID = keyboard.nextInt();
-        System.out.println("Please enter Quantity");
 
-        int Quantity = keyboard.nextInt();
-        System.out.println(productID);
-        System.out.println(Quantity);
+        while(flag == true){
+            try{
+                System.out.println("Please enter Product ID");
+                Scanner idKey = new Scanner(System.in);
+                productID = idKey.nextInt();
+                flag = false;
+            }
+            catch(InputMismatchException e){
+                System.out.println("invalid ID value, please try again");
+            }
+        }
+        flag = true;
+        while(flag == true){
+            try{
+                System.out.println("Please enter quantity");
+                Scanner quantityKey = new Scanner(System.in);
+                Quantity = quantityKey.nextInt();
+                flag = false;
+            }
+            catch (Exception e){
+                System.out.println("invalid quantity value, please try again");
+            }
+        }
 
         shoppingCart.addToCart(productID, Quantity);
 
@@ -176,27 +177,14 @@ public class StoreManager {
             }
         }
 
-
-
-        //Inventory inv = this.getInventories().get(command);
-
-
-
-
-
-    }
-    /*
-
-        this.cart.addToCart(productID,quantity);
-        for (int i = 0; i < quantity; i++){
-            this.inventory.removeQuantity(productID);
-        }
     }
 
-     */
 
     public void removeFromCart(ShoppingCart shoppingCart){
         StringBuilder iteminfo  = new StringBuilder();
+        boolean flag = true;
+        int productID = 0;
+        int Quantity = 0;
 
         System.out.println("\\----------REMOVE---------/");
         System.out.println();
@@ -237,14 +225,28 @@ public class StoreManager {
         System.out.println(iteminfo);
 
         System.out.println("");
-        System.out.println("Please enter Product ID");
-        Scanner keyboard = new Scanner(System.in);
-        int productID = keyboard.nextInt();
-        System.out.println("Please enter Quantity");
-
-        int Quantity = keyboard.nextInt();
-        System.out.println(productID);
-        System.out.println(Quantity);
+        while(flag == true){
+            try{
+                System.out.println("Please enter Product ID");
+                Scanner idKey = new Scanner(System.in);
+                productID = idKey.nextInt();
+                flag = false;
+            }catch(Exception e){
+                System.out.println("invalid ID value, please try again");
+            }
+        }
+        flag = true;
+        while(flag == true){
+            try{
+                System.out.println("Please enter quantity");
+                Scanner quantityKey = new Scanner(System.in);
+                Quantity = quantityKey.nextInt();
+                flag = false;
+            }
+            catch(Exception e){
+                System.out.println("invalid quantity value, please try again");
+            }
+        }
 
         shoppingCart.removeFromCart(productID, Quantity);
 
@@ -268,19 +270,6 @@ public class StoreManager {
             }
         }
 
-
-
-
-
-
-
-        /*
-        this.cart.removeFromCart(productID,quantity);
-        for (int i = 0; i < quantity; i++){
-            this.inventory.addQuantity(productID);
-        }
-
-         */
     }
 
     /**
@@ -333,25 +322,7 @@ public class StoreManager {
 
         return total;
 
-        /*
-        boolean success = true;
-        for(int[] i : cart) {
-            if (inventory.getQuantity(i[0]) >= i[1]) {
-                total += inventory.getProductInfo(i[0]).getPrice() * i[1];
-                inventory.removeQuantity(i[0]);
-            } else {
-                success = false;
-                break;
-            }
-        }
-        if(!success){
-            System.out.println("Transaction Failed");
-        }
-        else{
-            System.out.println("Total = " +total);
-        }
 
-         */
     }
 
     public void quit(ShoppingCart shoppingCart, int cardID){
@@ -397,15 +368,22 @@ public class StoreManager {
     public ShoppingCart findCart(){
         //System.out.println("CART >> ");
         ShoppingCart currentCart = new ShoppingCart();
-        for(HashMap.Entry i : shoppingCarts.entrySet()){
-            System.out.println((int)i.getKey());
-        }
+        int cartID = 0;
+
 
         boolean flag = true;
         while(flag){
             System.out.println("CART >> ");
-            Scanner keyboard = new Scanner(System.in);
-            int cartID = keyboard.nextInt();
+            boolean inputIsNum = true;
+            while (inputIsNum == true) {
+                try {
+                    Scanner keyboard = new Scanner(System.in);
+                    cartID = keyboard.nextInt();
+                    inputIsNum = false;
+                } catch (InputMismatchException e) {
+                    System.out.println("only accept number input , please try again");
+                }
+            }
 
             for(HashMap.Entry entry : shoppingCarts.entrySet()){
                 int shoppingCart = (int)entry.getKey();
@@ -416,7 +394,7 @@ public class StoreManager {
                 }
             }
             if(flag == true) {
-                System.out.println("invalid input");
+                System.out.println("invalid Cart number, please try again");
             }else{
                 break;
             }

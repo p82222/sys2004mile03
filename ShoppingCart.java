@@ -32,11 +32,7 @@ public class ShoppingCart {
         if(items.containsKey(productID)){
                 items.put(productID, items.get(productID) + quantity);
                 return;
-
-
         }
-
-
         items.put(productID,quantity);
 
     }
@@ -71,11 +67,6 @@ public class ShoppingCart {
 
         return items;
     }
-
-
-
-
-
 
 
 

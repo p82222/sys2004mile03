@@ -3,10 +3,7 @@
 //STUDENT NAME: Keefer Belanger//
 //STUDENT ID: St# 101152085//
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.Map;
+import java.util.*;
 
 public class Inventory {
 
@@ -63,6 +60,11 @@ public class Inventory {
      *
      */
     public void addQuantity(int id) {
+
+        float price = 0;
+
+        int num = 0;
+
         for (Map.Entry<Product, Integer> set : products.entrySet()) {
             if(set.getKey().getId() == id){
 
@@ -81,12 +83,33 @@ public class Inventory {
         System.out.println("enter the product name");
         String name = keyboard.nextLine();
 
-        System.out.println("enter the product price");
-        float price = keyboard.nextFloat();
+        boolean flag = true;
+        while (flag == true) {
+            try {
+                System.out.println("enter the product price");
+                Scanner pricekey = new Scanner(System.in);
+                price = pricekey.nextFloat();
+                flag = false;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid price value, please try again");
+            }
+        }
         Product product = new Product(name,id,price);
+        flag = true;
+        while(flag == true){
+            try{
+                System.out.println("enter the quantity amount");
+                Scanner quantityKey = new Scanner(System.in);
+                num = quantityKey.nextInt();
+                flag = false;
 
-        System.out.println("enter new Quantity amount");
-        int num = keyboard.nextInt();
+            }catch(InputMismatchException e){
+                System.out.println("Invalid quantity value, please try again");
+            }
+
+
+        }
+
         this.products.put(product, num);
         return;
     }

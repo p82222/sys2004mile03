@@ -30,7 +30,6 @@ public class StoreView {
 
     public static void main(String[] args) {
 
-
         /**
          * the first product
          */
@@ -39,6 +38,8 @@ public class StoreView {
         Product iPhone = new Product("iPhone", 303, 3.0);
         Product iPad = new Product("iPad",404 , 4.0);
         Product MacBook = new Product("MacBook", 505, 5.0);
+
+
 
 
 
@@ -54,13 +55,15 @@ public class StoreView {
 
 
 
-
-
         /**
          * the manager for the StoreView
          */
         StoreManager manager = new StoreManager();
+
+
+
         ShoppingCart currentCart;
+
 
 
         StoreView sv1 = new StoreView(manager, manager.assignNewCartID());
@@ -80,7 +83,7 @@ public class StoreView {
 
         System.out.println("============store test from now========");
 
-        System.out.println(" pick first cart");
+        System.out.println("pick first cart");
 
         currentCart = manager.findCart();
 
