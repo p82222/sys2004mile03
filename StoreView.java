@@ -115,6 +115,7 @@ public class StoreView {
             }
 
         }
+        System.out.println("");
         System.out.println("thanks for shopping with us today");
 
 

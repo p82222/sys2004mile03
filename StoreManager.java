@@ -146,12 +146,27 @@ public class StoreManager {
                 System.out.println("Please enter Product ID");
                 Scanner idKey = new Scanner(System.in);
                 productID = idKey.nextInt();
-                flag = false;
+                for(int i = 0; i< this.getInventories().size(); i++){
+                    for(Product p: this.getInventories().get(i).getProducts().keySet()){
+                        int id = p.getId();
+                        if(id == productID){
+                            flag = false;
+                            break;
+                        }
+                    }
+                }
+                if(flag == true) {
+                    System.out.println("no Product ID on the list, please try again");
+                }
+
             }
             catch(InputMismatchException e){
                 System.out.println("invalid ID value, please try again");
             }
         }
+
+
+
         flag = true;
         while(flag == true){
             try{
@@ -159,6 +174,23 @@ public class StoreManager {
                 Scanner quantityKey = new Scanner(System.in);
                 Quantity = quantityKey.nextInt();
                 flag = false;
+                for(int i = 0; i< this.getInventories().size(); i++){
+                    for(Product p: this.getInventories().get(i).getProducts().keySet()){
+                        int id = p.getId();
+                        int stock = this.getInventories().get(i).getQuantity(id);
+                        if(id == productID){
+                            if(stock >= Quantity){
+                                flag = false;
+                                break;
+                            }
+                            else{
+                                System.out.println("invalid quantity value, please try again");
+                                flag = true;
+                            }
+                        }
+                    }
+                }
+
             }
             catch (Exception e){
                 System.out.println("invalid quantity value, please try again");
@@ -230,7 +262,19 @@ public class StoreManager {
                 System.out.println("Please enter Product ID");
                 Scanner idKey = new Scanner(System.in);
                 productID = idKey.nextInt();
-                flag = false;
+                //flag = false;
+                for(Map.Entry mapElement : shoppingCart.getItems().entrySet()){
+                    int itemID = (int) mapElement.getKey();
+                    if(itemID == productID){
+                        flag = false;
+                        break;
+                    }
+                }if(flag == true){
+                    System.out.println("Product ID not in the cart, please try again");
+                }
+
+
+
             }catch(Exception e){
                 System.out.println("invalid ID value, please try again");
             }
@@ -241,7 +285,20 @@ public class StoreManager {
                 System.out.println("Please enter quantity");
                 Scanner quantityKey = new Scanner(System.in);
                 Quantity = quantityKey.nextInt();
-                flag = false;
+
+                for(Map.Entry mapElement : shoppingCart.getItems().entrySet()){
+                    int itemID = (int) mapElement.getKey();
+                    int quantity = (int) mapElement.getValue();
+                    if(itemID == productID){
+                        if(quantity >= Quantity){
+                            flag = false;
+                            break;
+                        }
+                    }
+                }if(flag == true){
+                    System.out.println("invalid quantity in cart, please try again");
+                }
+
             }
             catch(Exception e){
                 System.out.println("invalid quantity value, please try again");
@@ -286,11 +343,9 @@ public class StoreManager {
         System.out.println("Quantity | Product Name | Unit Price | Product ID" );
         float total = 0;
         for(Map.Entry mapElement : shoppingCart.getItems().entrySet()){
+
             int itemID = (int) mapElement.getKey();
-
             int quantity = (int) mapElement.getValue();
-
-
 
             for(int i = 0; i< this.getInventories().size(); i++){
                 for(Product p: this.getInventories().get(i).getProducts().keySet()){
@@ -308,11 +363,7 @@ public class StoreManager {
                         iteminfo.append(" | (");
                         iteminfo.append(id);
                         iteminfo.append(")\n");
-
-
-
                     }
-
                 }
             }
 
