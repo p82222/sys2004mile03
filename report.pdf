@@ -1,0 +1,20 @@
+Names: 
+Chia-Yu Liu, St#100698737
+Keefer Belanger, St#101152085
+
+Questions:
+1. The testing methods that were used was the try/catch exceptions, and the use of assert while using Junit testing.
+2. The methods that were unable to be tested with Junit was the methods that produce parts of the ui such as the StoreManager method command(), browse(), processTransaction(), and addInventory(). We cannot test these methods as they print the specific ui that the user then has to provide an input, which we cannot test a users specific input.
+3. Parts of the code that don’t compute a value and only are used to display the store ui don’t need to be tested as they are only there to display. The specific methods that compute can fail if values aren’t used correctly, the methods used to display already have exceptions if a user inputs something that the method see’s as invalid. In general every inch of code that can be tested should be tested.
+
+ChangeLog
+StoreManager changelog:
+•	Added new command method that displays part of the ui for the storeview class that prints the store options like browse, add, remove etc. This method also ensures that a valid command is entered to be able to run, if a command is invalid it asks for a valid command.
+•	Added new browse method that displays part of the ui for the storeview class that shows the product info like the name, id, and unit price.
+•	Updated the addToCart method that displays part of the ui for the storeview class that shows the ui for adding a product to the cart. Asks the user for the product id of the item they want to add to the cart and asks them to try again if product id is not on list using a try/catch exception.
+•	Updated the removeFromCart method that displays part of the ui for the storeview class that shows the ui for removing a product from the cart. Asks user for product id of item and removes it from cart but if id not in cart asks to try again using a try/catch exception. Also asks for quantity of product wanted to be removed from cart and if quantity is invalid asks to try again using try/catch exception. If all inputs valid removes product from cart.
+•	Added new processTransaction method that displays part of the ui for the storeview class that shows the check out ui. 
+•	Added new quit method that when used will put all products, inventory, and shoppingcart back to their original set values.
+•	Added new assignNewCartID method that creates a new cart and return that cart with an ID.
+•	Added new findCart method that takes an input of the cart number and if the number input is invalid asks to try again.
+
