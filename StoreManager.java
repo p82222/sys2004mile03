@@ -1,10 +1,9 @@
-//STUDENT NAME: Chia-Yu Liu //
-//STUDENT ID: 100698737     //
-//STUDENT NAME: Keefer Belanger//
-//STUDENT ID: 101152085//
-
-
 package Store;
+
+//STUDENT NAME: Chia-Yu Liu
+//STUDENT ID: 100698737
+//STUDENT NAME: Keefer Belanger
+//STUDENT ID: 101152085
 
 import java.awt.*;
 import java.util.*;
@@ -34,6 +33,10 @@ public class StoreManager {
         this(new Inventory());
     }
 
+    /**
+     * Creates a StoreManager constructor with a parameter
+     * @param inventory
+     */
     public StoreManager(Inventory inventory){
         this.inventory = inventory;
         shoppingCarts = new HashMap<>();
@@ -65,15 +68,19 @@ public class StoreManager {
         return stock;
     }
 
-
+    /**
+     * Creates a new cart using an incremented ID and a previously created cart
+     */
     public void newCart(){
         cardID +=1;
         cart = new ShoppingCart();
         this.shoppingCarts.put(cardID, cart);
     }
 
-
-
+    /**
+     * Displays the options users have for input and if user inputs invalid command asks again
+     * @return
+     */
     public String command() {
         boolean flag = true;
         Scanner keyboard = new Scanner(System.in);
@@ -97,6 +104,10 @@ public class StoreManager {
         return command;
     }
 
+    /**
+     * Displays the option after user has input into the command method a valid input, browse shows the products
+     * name, price, and stock in inventory
+     */
     //good, tested
     public void browse(){
         StringBuilder iteminfo  = new StringBuilder();
@@ -122,10 +133,11 @@ public class StoreManager {
         System.out.println(iteminfo);
     }
 
-
-
-
-
+    /**
+     * Displays the option after user has input into the command method a valid input, if valid product ID and quantity
+     * is input into addToCart, that item is added to the cart
+     * @param shoppingCart
+     */
     //worked, tested
     public void addToCart(ShoppingCart shoppingCart){
 
@@ -227,7 +239,11 @@ public class StoreManager {
 
     }
 
-
+    /**
+     * Displays the option after user has input into the command method a valid input, if valid product ID and quantity
+     * input, item is removed from the cart
+     * @param shoppingCart
+     */
     public void removeFromCart(ShoppingCart shoppingCart){
         StringBuilder iteminfo  = new StringBuilder();
         boolean flag = true;
@@ -348,7 +364,7 @@ public class StoreManager {
     /**
      * Checks the quantity exists and if it does processes the transaction
      *
-     * @param cart
+     * @param shoppingCart
      * @void the method has no return value
      */
     public float processTransaction(ShoppingCart shoppingCart){
@@ -394,6 +410,12 @@ public class StoreManager {
 
     }
 
+    /**
+     * When called from the command method quits out of storeView and returns product, inventory, and shoppingCart
+     * to original values
+     * @param shoppingCart
+     * @param cardID
+     */
     public void quit(ShoppingCart shoppingCart, int cardID){
 
         for(Map.Entry mapElement : shoppingCart.getItems().entrySet()){
@@ -418,22 +440,36 @@ public class StoreManager {
 
     }
 
+    /**
+     * get products from Inventories
+     * @return ArrayList
+     */
     //worked, tested, get products from Inventories;
     public ArrayList<Inventory> getInventories(){
         return inventorys;
     }
 
-
-
+    /**
+     * assigns a new cart ID
+     * @return
+     */
     public int assignNewCartID(){
         newCart();
         return cardID;
     }
 
+    /**
+     * Adds the newInventory that was created to the Inventory
+     * @param newInventory
+     */
     public void addInventory(Inventory newInventory){
         this.inventorys.add(newInventory);
     }
 
+    /**
+     * Finds the cart that was created using a previous method
+     * @return
+     */
     public ShoppingCart findCart(){
         //System.out.println("CART >> ");
         ShoppingCart currentCart = new ShoppingCart();
@@ -471,5 +507,4 @@ public class StoreManager {
         System.out.println("found currentCart");
         return currentCart;
     }
-
 }
