@@ -1,3 +1,5 @@
+package Store;
+
 //STUDENT NAME: Chia-Yu Liu
 //STUDENT ID: 100698737
 //STUDENT NAME: Keefer Belanger
@@ -24,14 +26,14 @@ public class ShoppingCart {
 
     /**
      * Adds product to cart
-     * @param newProduct
+     * @param productID, quantity
      */
     //worked, tested
     public void addToCart(int productID, int quantity){
 
         if(items.containsKey(productID)){
-                items.put(productID, items.get(productID) + quantity);
-                return;
+            items.put(productID, items.get(productID) + quantity);
+            return;
         }
         items.put(productID,quantity);
 
@@ -39,9 +41,8 @@ public class ShoppingCart {
 
     /**
      * Removes product from cart
-     * @param oldProduct
+     * @param productID, quantity
      */
-
     public void removeFromCart(int productID, int quantity){
         // check if cart has the product by checking productID
         if(items.containsKey(productID)){
