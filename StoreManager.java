@@ -4,6 +4,8 @@
 //STUDENT ID: 101152085//
 
 
+package Store;
+
 import java.awt.*;
 import java.util.*;
 
@@ -44,10 +46,23 @@ public class StoreManager {
      * @void the method has no return value
      *
      */
-    public void checkStock(int id){
-        int stock;
-        stock = inventory.getQuantity(id);
-        System.out.println("Stock is " +stock);
+    public int checkStock(int id){
+        int stock = 0;
+        for(int i = 0; i< this.getInventories().size(); i++){
+            for(Product p: this.getInventories().get(i).getProducts().keySet()){
+                int productID = p.getId();
+                String name = p.getName();
+                double price = p.getPrice();
+                int Quantity = this.getInventories().get(i).getQuantity(id);
+                if(productID == id){
+                    stock = Quantity;
+                }
+
+
+
+            }
+        }
+        return stock;
     }
 
 
@@ -343,10 +358,12 @@ public class StoreManager {
         System.out.println();
         System.out.println("Quantity | Product Name | Unit Price | Product ID" );
         float total = 0;
+
         for(Map.Entry mapElement : shoppingCart.getItems().entrySet()){
 
             int itemID = (int) mapElement.getKey();
             int quantity = (int) mapElement.getValue();
+
 
             for(int i = 0; i< this.getInventories().size(); i++){
                 for(Product p: this.getInventories().get(i).getProducts().keySet()){
