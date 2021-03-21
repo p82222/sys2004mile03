@@ -4,7 +4,6 @@
 //STUDENT ID: 101152085//
 
 
-import java.awt.*;
 import java.util.*;
 
 
@@ -50,15 +49,19 @@ public class StoreManager {
         System.out.println("Stock is " +stock);
     }
 
-
+    /**
+     * Creates a new shoppingcart that puts an ID and cart into it
+     */
     public void newCart(){
         cardID +=1;
         cart = new ShoppingCart();
         this.shoppingCarts.put(cardID, cart);
     }
 
-
-
+    /**
+     * The ui to select which option the user wants to pick
+     * @return
+     */
     public String command() {
         boolean flag = true;
         Scanner keyboard = new Scanner(System.in);
@@ -82,6 +85,9 @@ public class StoreManager {
         return command;
     }
 
+    /**
+     * Displays the browse tab after user inputs b after the command method
+     */
     //good, tested
     public void browse(){
         StringBuilder iteminfo  = new StringBuilder();
@@ -107,10 +113,11 @@ public class StoreManager {
         System.out.println(iteminfo);
     }
 
-
-
-
-
+    /**
+     * Displays the addToCart ui after user input in the command method, checks if the product
+     *wanting to be added is valid
+     * @param shoppingCart
+     */
     //worked, tested
     public void addToCart(ShoppingCart shoppingCart){
 
@@ -212,7 +219,11 @@ public class StoreManager {
 
     }
 
-
+    /**
+     * Displays the removeFromCart ui after user input from the command method, checks if the product
+     * wanting to be removed is valid
+     * @param shoppingCart
+     */
     public void removeFromCart(ShoppingCart shoppingCart){
         StringBuilder iteminfo  = new StringBuilder();
         boolean flag = true;
@@ -333,7 +344,7 @@ public class StoreManager {
     /**
      * Checks the quantity exists and if it does processes the transaction
      *
-     * @param cart
+     * @param shoppingCart
      * @void the method has no return value
      */
     public float processTransaction(ShoppingCart shoppingCart){
@@ -377,6 +388,11 @@ public class StoreManager {
 
     }
 
+    /**
+     * quits out of all storeview ui and returns products, inventories, and shoppingcart to original values
+     * @param shoppingCart
+     * @param cardID
+     */
     public void quit(ShoppingCart shoppingCart, int cardID){
 
         for(Map.Entry mapElement : shoppingCart.getItems().entrySet()){
@@ -401,22 +417,36 @@ public class StoreManager {
 
     }
 
+    /**
+     * Get products from Inventories
+     * @return ArrayList of inventory
+     */
     //worked, tested, get products from Inventories;
     public ArrayList<Inventory> getInventories(){
         return inventorys;
     }
 
-
-
+    /**
+     * Assigns a new cart with ID
+     * @return int
+     */
     public int assignNewCartID(){
         newCart();
         return cardID;
     }
 
+    /**
+     * Adds new inventory to the inventorys ArrayList
+     * @param newInventory
+     */
     public void addInventory(Inventory newInventory){
         this.inventorys.add(newInventory);
     }
 
+    /**
+     * Finds cart by using the cart number that was created in methods before
+     * @return
+     */
     public ShoppingCart findCart(){
         //System.out.println("CART >> ");
         ShoppingCart currentCart = new ShoppingCart();
@@ -454,5 +484,4 @@ public class StoreManager {
         System.out.println("found currentCart");
         return currentCart;
     }
-
 }
